@@ -130,7 +130,7 @@ app.post("/retrieveAlbumFirstImageApi", (req, res) => {
     });
 });
 
-var server = app.listen(9002, () => {
+var server = app.listen(9000, () => {
   var host = server.address().address;
   var port = server.address().port;
   console.log("server is running at http://%s:%s", host, port);

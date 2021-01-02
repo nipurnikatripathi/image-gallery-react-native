@@ -1,9 +1,10 @@
 import Axios from 'axios';
+import {ServerUrl} from '../ServerUrl';
 
 export const uploadImageApi = async (filedata) => {
   console.log('image to be uploaded', filedata);
 
-  fetch('http://192.168.100.247:9002/uploadImage', {
+  fetch(ServerUrl + 'uploadImage', {
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -24,10 +25,7 @@ export const createCategoryApi = async (categoryName) => {
     categoryName,
   };
   try {
-    const response = await Axios.post(
-      `http://192.168.100.247:9002/createCategory`,
-      category,
-    );
+    const response = await Axios.post(ServerUrl + 'createCategory', category);
     console.log('category response in image api', response.data);
     return response.data;
   } catch (err) {
@@ -37,9 +35,7 @@ export const createCategoryApi = async (categoryName) => {
 
 export const getCategoryCollectionApi = async () => {
   try {
-    const response = await fetch(
-      `http://192.168.100.247:9002/getCategoryCollection`,
-    );
+    const response = await fetch(ServerUrl + 'getCategoryCollection');
     console.log('response of category collection', response);
     const json = await response.json();
     console.log('response.json in category collection', json);
@@ -51,14 +47,14 @@ export const getCategoryCollectionApi = async () => {
 
 export const retrieveImageApi = async () => {
   try {
-    const response = await fetch(`http://192.168.100.247:9002/retrieveImage`);
+    const response = await fetch(ServerUrl + 'retrieveImage');
     console.log('response in image api', response);
     const json = await response.json();
     console.log('response.json in image api', json);
 
     return json;
   } catch (err) {
-    console.log('something is wrong !');
+    console.log('something is wrong$$$ !');
   }
 };
 
@@ -76,7 +72,7 @@ export const retrieveAlbumImageApi = async (categoryId) => {
     };
     console.log('requestOptions in image api', requestOptions);
     const response = await fetch(
-      `http://192.168.100.247:9002/retrieveAlbumImageApi`,
+      ServerUrl + 'retrieveAlbumImageApi',
       requestOptions,
     );
     console.log('response in album api', response);
@@ -101,7 +97,7 @@ export const retrieveAlbumFirstImageApi = async (category) => {
     };
     console.log('requestoptions in albumfirst image api', requestOptions);
     const response = await fetch(
-      `http://192.168.100.247:9002/retrieveAlbumFirstImageApi`,
+      ServerUrl + 'retrieveAlbumFirstImageApi',
       requestOptions,
     );
     console.log('response in album api', response);

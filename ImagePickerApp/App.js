@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Studio from './src/Studio/Studio';
 
@@ -24,9 +25,43 @@ export const ImageContext = React.createContext();
 const App = () => {
   const [uploadImageValue, setUploadImageValue] = useState(false);
 
+  const config = {
+    screens: {
+      Studio: {
+        path: 'studio/:id',
+        parse: {
+          id: (id) => `${id}`,
+        },
+      },
+      UploadImage: {
+        path: 'upload/:id',
+        parse: {
+          id: (id) => `${id}`,
+        },
+      },
+      Album: {
+        path: 'album/:id',
+        parse: {
+          id: (id) => `${id}`,
+        },
+      },
+      DisplaySingleCategory: {
+        path: 'displaysinglecategory/:id',
+        parse: {
+          id: (id) => `${id}`,
+        },
+      },
+    },
+  };
+
+  const linking = {
+    prefixes: ['https://www.imagepicker.com/page'],
+    config,
+  };
+
   console.log('inside app.js');
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <ImageContext.Provider
         value={{
           data: uploadImageValue,

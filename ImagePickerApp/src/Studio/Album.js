@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {retrieveAlbumFirstImageApi, getCategoryCollectionApi} from './ImageApi';
+import {ServerUrl} from '../ServerUrl';
 
 export default function Album({navigation}) {
   console.log('album folder');
@@ -18,7 +19,7 @@ export default function Album({navigation}) {
       const response = await getCategoryCollectionApi();
       console.log('response in album for category collection ', response);
 
-      response.map(async function (item, index) {
+      response?.map(async function (item, index) {
         console.log('map data', item._id);
         const firstImageResponse = await retrieveAlbumFirstImageApi(item._id);
         console.log('first image response', firstImageResponse);
@@ -41,23 +42,25 @@ export default function Album({navigation}) {
           {firstImage?.map(function (item, index) {
             console.log('item inside first image', item.category.category);
             return (
-              <TouchableOpacity
-                key={index}
-                activeOpacity={0.5}
-                style={styles.buttonStyle}
-                onPress={() =>
-                  navigation.navigate('DisplaySingleCategory', {
-                    categoryId: item.category,
-                  })
-                }>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: 'http://192.168.100.247:9002/' + item.filename,
-                  }}
-                />
-                <Text style={styles.textStyle}>{item.category.category} </Text>
-              </TouchableOpacity>
+              <View>
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.5}
+                  style={styles.buttonStyle}
+                  onPress={() =>
+                    navigation.navigate('DisplaySingleCategory', {
+                      categoryId: item?.category,
+                    })
+                  }>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: ServerUrl + item?.filename,
+                    }}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.textStyle}>{item?.category?.category}</Text>
+              </View>
             );
           })}
         </View>

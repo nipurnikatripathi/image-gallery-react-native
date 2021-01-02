@@ -11,10 +11,12 @@ import {
 import {retrieveImageApi} from './ImageApi';
 import {ImageContext} from '../../App';
 import {FlatList} from 'react-native-gesture-handler';
+import {ServerUrl} from '../ServerUrl';
 
 export default function StudioHome({navigation, props}) {
-
   const {data, setUploadImageValue} = useContext(ImageContext);
+
+  console.log('server url ::::::::::', ServerUrl);
 
   console.log('inside studio home');
   const [image, setImages] = useState([]);
@@ -32,37 +34,39 @@ export default function StudioHome({navigation, props}) {
   console.log('value from context', data);
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => navigation.navigate('UploadImage')}>
-          <Text style={styles.textStyle}>Upload Image</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => navigation.navigate('Album')}>
-          <Text style={styles.textStyle}>Album</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <ScrollView>
-          <View style={styles.imageContainer}>
-            {image?.map(function (item, index) {
-              return (
-                <Image
-                  key={index}
-                  style={styles.image}
-                  source={{
-                    uri: 'http://192.168.100.247:9002/' + item.filename,
-                  }}
-                />
-              );
-            })}
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonStyle}
+            onPress={() => navigation.navigate('UploadImage')}>
+            <Text style={styles.textStyle}>Upload Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonStyle}
+            onPress={() => navigation.navigate('Album')}>
+            <Text style={styles.textStyle}>Album</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <ScrollView>
+            <View style={styles.imageContainer}>
+              {image?.map(function (item, index) {
+                return (
+                  <Image
+                    key={index}
+                    style={styles.image}
+                    source={{
+                      uri: ServerUrl + item?.filename,
+                    }}
+                  />
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -88,6 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 5,
     margin: 5,
-    width: 180,
+    width: 150,
   },
 });

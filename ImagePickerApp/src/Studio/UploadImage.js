@@ -12,6 +12,7 @@ import {
   Platform,
   PermissionsAndroid,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
@@ -175,53 +176,55 @@ const UploadImage = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={styles.container}>
-        <Image source={{uri: filePath.uri}} style={styles.imageStyle} />
-        <Text style={styles.textStyle}>{filePath.uri}</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <Image source={{uri: filePath.uri}} style={styles.imageStyle} />
+          <Text style={styles.textStyle}>{filePath.uri}</Text>
 
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => captureImage('photo')}>
-          <Text style={styles.textStyle}>Launch Camera for Image</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonStyle}
+            onPress={() => captureImage('photo')}>
+            <Text style={styles.textStyle}>Launch Camera for Image</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => chooseFile('photo')}>
-          <Text style={styles.textStyle}>Choose Image</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonStyle}
+            onPress={() => chooseFile('photo')}>
+            <Text style={styles.textStyle}>Choose Image</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
+          {/* <TouchableOpacity
           activeOpacity={0.5}
           style={styles.buttonStyle}
           onPress={() => captureImage('video')}>
           <Text style={styles.textStyle}>Launch Camera for Video</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TouchableOpacity
+          {/* <TouchableOpacity
           activeOpacity={0.5}
           style={styles.buttonStyle}
           onPress={() => chooseFile('video')}>
           <Text style={styles.textStyle}>Choose Video</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TextInput
-          activeOpacity={0.5}
-          style={styles.textInputStyle}
-          //style={{height: 40}}
-          placeholder="Enter Category"
-          onChangeText={(text) => setEnterCategory(text.toLowerCase())}
-          //defaultValue={enterCategory}
-        />
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => handleUpload()}>
-          <Text style={styles.textStyle}>Upload</Text>
-        </TouchableOpacity>
-      </View>
+          <TextInput
+            activeOpacity={0.5}
+            style={styles.textInputStyle}
+            //style={{height: 40}}
+            placeholder="Enter Category"
+            onChangeText={(text) => setEnterCategory(text.toLowerCase())}
+            //defaultValue={enterCategory}
+          />
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonStyle}
+            onPress={() => handleUpload()}>
+            <Text style={styles.textStyle}>Upload</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

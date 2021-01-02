@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Image, ScrollView, StyleSheet} from 'react-native';
 import {retrieveAlbumImageApi} from '../ImageApi';
+import {ServerUrl} from '../../ServerUrl';
 
 export default function DisplaySingleCategory({route}) {
   const [image, setImages] = useState([]);
@@ -27,7 +28,7 @@ export default function DisplaySingleCategory({route}) {
                 key={index}
                 style={styles.image}
                 source={{
-                  uri: 'http://192.168.100.247:9002/' + item.filename,
+                  uri: ServerUrl + item.filename,
                 }}
               />
             );
