@@ -12,9 +12,20 @@ import {retrieveImageApi} from './ImageApi';
 import {ImageContext} from '../../App';
 import {FlatList} from 'react-native-gesture-handler';
 import {ServerUrl} from '../ServerUrl';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 export default function StudioHome({navigation, props}) {
   const {data, setUploadImageValue} = useContext(ImageContext);
+
+  const [enabled, setEnabled] = useState(
+    crashlytics().isCrashlyticsCollectionEnabled,
+  );
+
+  async function toggleCrashlytics() {
+    await crashlytics()
+      .setCrashlyticsCollectionEnabled(!enabled)
+      .then(() => setEnabled(crashlytics().isCrashlyticsCollectionEnabled));
+  }
 
   console.log('server url ::::::::::', ServerUrl);
 
@@ -35,6 +46,14 @@ export default function StudioHome({navigation, props}) {
   return (
     <View style={styles.container}>
       <ScrollView>
+        <View>
+          <Button title="Toggle Crashlytics" onPress={toggleCrashlytics} />
+          <Button title="Crash" onPress={() => crashlytics().crash()} />
+          <Text>
+            Crashlytics is currently {enabled ? 'enabled' : 'disabled'}
+          </Text>
+        </View>
+
         <View style={styles.imageContainer}>
           <TouchableOpacity
             activeOpacity={0.5}

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
+import {Text, View, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Studio from './src/Studio/Studio';
 
@@ -24,6 +24,12 @@ export const ImageContext = React.createContext();
 
 const App = () => {
   const [uploadImageValue, setUploadImageValue] = useState(false);
+
+  async function toggleCrashlytics() {
+    await crashlytics()
+      .setCrashlyticsCollectionEnabled(!enabled)
+      .then(() => setEnabled(crashlytics().isCrashlyticsCollectionEnabled));
+  }
 
   const config = {
     screens: {
@@ -69,10 +75,6 @@ const App = () => {
         }}>
         <Studio />
       </ImageContext.Provider>
-
-      {/* <ImageProvider>
-        <Studio />
-      </ImageProvider> */}
     </NavigationContainer>
   );
 };

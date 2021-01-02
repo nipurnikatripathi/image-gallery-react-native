@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "203651085397",
+    "project_id": "react-native-image-picker",
+    "storage_bucket": "react-native-image-picker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203651085397:android:24295b6e4b0cc40cf090dc",
+        "android_client_info": {
+          "package_name": "com.imagepickerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203651085397-4desacbga960mh5ppugmmr966j6djg4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwKfVs6YFW_fi0O1Avayu81GGrBD2ZuEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203651085397-4desacbga960mh5ppugmmr966j6djg4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
